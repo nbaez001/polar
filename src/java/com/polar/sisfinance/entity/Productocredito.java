@@ -30,7 +30,7 @@ public class Productocredito implements java.io.Serializable {
     private String docSustentatorios;
     private boolean estado;
     private int idTipoMoneda;
-    private int idTipoGarantia;
+    private Integer idTipoGarantia;
     private int idTipoCredito;
 
     public Productocredito() {
@@ -237,11 +237,11 @@ public class Productocredito implements java.io.Serializable {
         this.idTipoMoneda = idTipoMoneda;
     }
 
-    public int getIdTipoGarantia() {
+    public Integer getIdTipoGarantia() {
         return idTipoGarantia;
     }
 
-    public void setIdTipoGarantia(int idTipoGarantia) {
+    public void setIdTipoGarantia(Integer idTipoGarantia) {
         this.idTipoGarantia = idTipoGarantia;
     }
 

@@ -97,7 +97,7 @@
                                                         <label>Descripcion</label>
                                                         <textarea name="descripcion" class="form-control" placeholder="CREDITO OTORGADO SIN OBJETIVO DESCRITO"></textarea>
                                                     </div>
-                                                    <div class="col-ss-12 col-xs-6 col-sm-6">
+                                                    <div class="col-ss-12 col-xs-6 col-sm-4">
                                                         <label>Tipo garantia</label>
                                                         <select name="idTipoGarantia" class="form-control">
                                                             <c:forEach var="item" items="${listaTipogarantia}">

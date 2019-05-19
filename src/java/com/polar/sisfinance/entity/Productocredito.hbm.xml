@@ -71,8 +71,8 @@
         <property name="idTipoMoneda" type="int">
             <column name="idTipoMoneda" not-null="true" />
         </property>
-        <property name="idTipoGarantia" type="int">
-            <column name="idTipoGarantia" not-null="true" />
+        <property name="idTipoGarantia" type="java.lang.Integer">
+            <column name="idTipoGarantia"/>
         </property>
         <property name="idTipoCredito" type="int">
             <column name="idTipoCredito" not-null="true" />
