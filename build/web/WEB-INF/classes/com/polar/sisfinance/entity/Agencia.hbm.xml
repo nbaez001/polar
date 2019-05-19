@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04/07/2016 09:00:45 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.polar.sisfinance.entity.Agencia" table="agencia" catalog="polar" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="200" not-null="true" />
+        </property>
+        <property name="ruc" type="string">
+            <column name="ruc" length="15" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="50" not-null="true" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="11" not-null="true" />
+        </property>
+        <property name="distrito" type="string">
+            <column name="distrito" length="150" not-null="true" />
+        </property>
+        <property name="provincia" type="string">
+            <column name="provincia" length="50" not-null="true" />
+        </property>
+        <property name="departamento" type="string">
+            <column name="departamento" length="50" not-null="true" />
+        </property>
+        <property name="pais" type="string">
+            <column name="pais" length="50" not-null="true" />
+        </property>
+        <property name="fax" type="string">
+            <column name="fax" length="25" />
+        </property>
+        <property name="sede" type="boolean">
+            <column name="sede" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

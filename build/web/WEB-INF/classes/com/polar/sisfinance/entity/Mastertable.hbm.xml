@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04/07/2016 09:00:45 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.polar.sisfinance.entity.Mastertable" table="mastertable" catalog="polar" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="idTabla" type="int">
+            <column name="idTabla" not-null="true" />
+        </property>
+        <property name="idItem" type="int">
+            <column name="idItem" not-null="true" />
+        </property>
+        <property name="denominacion" type="string">
+            <column name="denominacion" length="200" not-null="true" />
+        </property>
+        <property name="abreviatura" type="string">
+            <column name="abreviatura" length="20" not-null="true" />
+        </property>
+        <property name="estado" type="boolean">
+            <column name="estado" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

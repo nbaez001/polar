@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04/07/2016 09:00:45 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.polar.sisfinance.entity.Garante" table="garante" catalog="polar" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cuentacredito" class="com.polar.sisfinance.entity.Cuentacredito" fetch="select">
+            <column name="idCuentacredito" not-null="true" />
+        </many-to-one>
+        <property name="numeroGarante" type="int">
+            <column name="numeroGarante" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="500" not-null="true" />
+        </property>
+        <property name="fechaActivacion" type="date">
+            <column name="fechaActivacion" length="0" not-null="true" />
+        </property>
+        <property name="fechaLevantamiento" type="date">
+            <column name="fechaLevantamiento" length="0" not-null="true" />
+        </property>
+        <property name="importeGarante" type="double">
+            <column name="importeGarante" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="importeComprometido" type="double">
+            <column name="importeComprometido" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="importeLibre" type="double">
+            <column name="importeLibre" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="estado" type="boolean">
+            <column name="estado" not-null="true" />
+        </property>
+        <property name="tipoGarante" type="string">
+            <column name="tipoGarante" length="50" not-null="true" />
+        </property>
+        <property name="tipoMoneda" type="string">
+            <column name="tipoMoneda" length="50" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

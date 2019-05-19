@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteOrdenGeneralPromedio" printOrder="Horizontal" pageWidth="595" pageHeight="842" columnWidth="509" leftMargin="43" rightMargin="43" topMargin="14" bottomMargin="14" uuid="f7e301cc-1e7b-47c2-9a93-a68a4f1d5d19">
+	<property name="ireport.zoom" value="1.2100000000000055"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="672"/>
+	<queryString>
+		<![CDATA[select a.nombre from agencia a where a.sede=false]]>
+	</queryString>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="totalCuota" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="totalAmortizacion" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<group name="sede_calificacion" isStartNewPage="true" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[]]></groupExpression>
+		<groupHeader>
+			<band height="484">
+				<textField isStretchWithOverflow="true">
+					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="509" height="484" uuid="40e6e85d-b0f6-40ca-8b99-e11cf39b0ab3"/>
+					<textElement textAlignment="Justified" markup="html">
+						<font size="9"/>
+						<paragraph lineSpacing="1_1_2"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<br>Debo/debemos y pagaré/mos solidaria e incondicionalmente a la orden de '<b>"+($F{nombre}==null?".........................":$F{nombre})+"</b>' "+
+"o a quien este hubiera transferido este pagaré la suma de: _____________________________________________ importe ricibido a mi/nuestra entera "+
+"satisfaccion y que me/nos obligo/obligamos a devolver en la misma moneda antes señalada, el día indicado como vencimiento en el local '<b>"+($F{nombre}==null?".........................":$F{nombre})+"</b>' "+
+"de esta ciudad, o en el lugar que se me/nos presentarse  a cobro, o mediante cargo en cualquiera de nuestras cuentas que mantengamos en la '<b>"+($F{nombre}==null?".........................":$F{nombre})+"</b>' "+
+"quedando convenido que a partir de la fecha de emisión de este pagaré y hasta su vencimiento abonaré/mos intereses compensatorios con una tasa efectiva anual "+
+"del _______% calculado sobre la base de 360 días.<br>"+
+"Asimismo queda expresamente pactado que a su vencimiento no fuera cancelado el importe de este pagare más los intereses devengados que asu vencimiento no fuera "+
+"cancelado el importe de este pagaré más los intereses devengados la suma adecuada devengará además de los interes compensatorios y a las comisiones establecidas, "+
+"los intereses moratorios del ______% efectiva anual calculado ambos sobre la base de 360 días más los gastos judiciales, extrajudiciales, notariales, tributos y "+
+"otros a que hubiere lugar.<br><br>"+
+"el ínteres compensatorio y moratorio antes pactados está sujeto a variación de acuerdo a las comisiones del mercado y a la sola decisión de la "+
+"'<b>"+($F{nombre}==null?".........................":$F{nombre})+"'</b>, siendo la aplicación las tasas de la <b>"+
+($F{nombre}==null?".........................":$F{nombre})+"</b>, tenga vigente para sus acreencias vigentes o en mora, según sea el caso, en la "+
+"fecha que estos se liquiden y paguen me/nos somete/mos a la competencia de los jueces y tribunales del lugar de emisión del presente pagaré y señalamos "+
+"como domicilio aquel que aparece indicado en este título valor donde se efectuaran las diligencias notariales, judiciales, y demás que sea necesario "+
+"para su validez que la suscriba/mos nuevamente autoriza/mos expresa e irrevocablemente a la <b>"+($F{nombre}==null?".........................":$F{nombre})+"</b>, "+
+"para que a su vencimiento o fecha posterior pueda disponer se carguen las sumas necesarias en nuestra/s cuenta/s, depósitos, bienes o valores que en cualquier "+
+"moneda mantega/mos en la <b>"+($F{nombre}==null?".........................":$F{nombre})+"</b> o en cualquiera de sus oficinas o agencias para atender el pago "+
+"total o parcial de sus intereses, capital, reajustes y/o demás obligaciones señaladas en este pagaré.<br><br>"+
+"El presente pagaré <b>no esta sujeto a protesto</b>, sin embargo, <b>"+($F{nombre}==null?".........................":$F{nombre})+"</b>, queda facultada a "+
+"disponer su protesto por falta de pago, siendo de cargo del/los eminente/s el/los costo/s del mismo.<br><br>"+
+"El los mismos términos y condiciones antes expresados y declarando haber leído en su integridad encontrando conforme y aceptando en todos sus extremos "+
+"interviene/n en este pagare el/la/los eminente/s asumiendo su misma calidad y obligaciones que este/os conforme al artículo 292 y 315 del CÓDIGO CIVIL, señalando "+
+"como domicilio el/los mismo/s por su/s conyugues."]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="197">
+				<rectangle>
+					<reportElement positionType="Float" x="205" y="23" width="62" height="70" uuid="14bb9904-1711-41f8-b4b3-091062eaeda4"/>
+				</rectangle>
+				<textField pattern="EEEEE dd &apos;de&apos; MMMMM &apos;del&apos; yyyy">
+					<reportElement positionType="Float" x="340" y="6" width="169" height="13" uuid="f8358fd6-8dad-4f37-b506-d7f8bc603f71"/>
+					<textElement textAlignment="Left">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEE MMMM dd">
+					<reportElement positionType="Float" x="269" y="6" width="71" height="13" uuid="3bb5ef4a-5530-4917-a9a5-02a0af863b41"/>
+					<textElement textAlignment="Right">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Ayacucho,   "]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement positionType="Float" x="0" y="23" width="205" height="70" uuid="9d2d7a87-4bce-48de-87c1-48abc030ada4"/>
+				</rectangle>
+				<rectangle>
+					<reportElement positionType="Float" x="267" y="23" width="178" height="70" uuid="d0f5177d-9dc2-48fa-be6d-5f65b585f7c4"/>
+				</rectangle>
+				<rectangle>
+					<reportElement positionType="Float" x="445" y="23" width="64" height="70" uuid="56644fa8-ea08-4b9f-97de-5af2438acad4"/>
+				</rectangle>
+				<textField>
+					<reportElement x="0" y="99" width="509" height="12" uuid="47bda9c0-1d76-4366-b7c4-748233a0bd42"/>
+					<textElement markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<b>Nombre/denominación social del eminente</b> "]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="113" width="509" height="12" uuid="62233336-13d9-420e-b593-5c3eeea5e66a"/>
+					<textElement markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[".............................................................................................................................................................................."]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="127" width="509" height="12" uuid="01b9a89b-fcd1-4c5a-9f90-775b01470e98"/>
+					<textElement markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<b>DNI/RUC N°</b>: ........................................................................................................................................................"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="141" width="509" height="12" uuid="1a83395c-ed2e-4b50-a275-1f1932b6e7d7"/>
+					<textElement markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<b>Domicilio</b>: ............................................................................................................................................................"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="155" width="509" height="12" uuid="d9ef9dc8-2f97-473d-8247-2496250c9c43"/>
+					<textElement markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<b>Distrito</b>: ............................................. <b>Provincia</b>: ......................................... <b>Dpto</b>: .........................................."]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="169" width="509" height="12" uuid="f36ed916-3068-49f4-9df0-9773e47093da"/>
+					<textElement markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<b>Nombre/del/la conyugue/conviviente/representante</b>: ................................................................................."]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="183" width="509" height="12" uuid="04a577e8-a879-49ad-8757-f5d03c1561eb"/>
+					<textElement markup="html">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<b>DNI N°</b>: ......................................................"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="118" splitType="Stretch">
+			<image>
+				<reportElement positionType="Float" x="0" y="-12" width="340" height="92" uuid="c19f3e46-2f99-4b4e-a532-eb1254c89c7e"/>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement positionType="Float" x="0" y="64" width="509" height="27" uuid="70f6b386-ac97-4be5-9169-083219fc2e1d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PAGARÉ"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="0" y="103" width="509" height="15" uuid="43bf2c71-75c7-4808-bc73-39b6776d8b33"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["MONEDA E IMPORTE _________________________"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="0" y="88" width="509" height="15" uuid="f50b00a8-6848-4467-aa13-38c8353d05c1"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["VENCE EL ____ DE _________________ DEL _________"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

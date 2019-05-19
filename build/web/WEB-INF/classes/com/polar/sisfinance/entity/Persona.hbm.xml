@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04/07/2016 09:00:45 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.polar.sisfinance.entity.Persona" table="persona" catalog="polar" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="conyugue" class="com.polar.sisfinance.entity.Conyugue" fetch="select" lazy="false">
+            <column name="idConyugue" />
+        </many-to-one>
+        <many-to-one name="estadocivil" class="com.polar.sisfinance.entity.Estadocivil" fetch="select" lazy="false">
+            <column name="idEstadocivil" />
+        </many-to-one>
+        <many-to-one name="genero" class="com.polar.sisfinance.entity.Genero" fetch="select" lazy="false">
+            <column name="idGenero" />
+        </many-to-one>
+        <property name="dni" type="java.lang.Integer">
+            <column name="dni" not-null="true" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="50" not-null="true" />
+        </property>
+        <property name="apellidoPat" type="string">
+            <column name="apellidoPat" length="50" not-null="true" />
+        </property>
+        <property name="apellidoMat" type="string">
+            <column name="apellidoMat" length="50" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="100" not-null="true" />
+        </property>
+        <property name="distrito" type="string">
+            <column name="distrito" length="50" />
+        </property>
+        <property name="provincia" type="string">
+            <column name="provincia" length="50" />
+        </property>
+        <property name="departamento" type="string">
+            <column name="departamento" length="50" />
+        </property>
+        <property name="pais" type="string">
+            <column name="pais" length="50" />
+        </property>
+        <property name="celular" type="java.lang.Long">
+            <column name="celular" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="50" />
+        </property>
+        <property name="ruc" type="java.lang.Long">
+            <column name="ruc"/>
+        </property>
+        <property name="fechaNacimiento" type="date">
+            <column name="fechaNacimiento" length="0" />
+        </property>
+        <property name="nacionalidad" type="string">
+            <column name="nacionalidad" length="50" />
+        </property>
+        <property name="profesion" type="string">
+            <column name="profesion" length="50" />
+        </property>
+    </class>
+</hibernate-mapping>

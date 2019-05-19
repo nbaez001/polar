@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteOrdenGeneralPromedio" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="756" leftMargin="43" rightMargin="43" topMargin="14" bottomMargin="14" uuid="f7e301cc-1e7b-47c2-9a93-a68a4f1d5d19">
+	<property name="ireport.zoom" value="0.9090909090909127"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="95"/>
+	<parameter name="idCuentaahorro" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="montoTexto" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select
+ca.id as id,
+ca.codigo as codigo,
+ca.importe as importe,
+ca.periodo as periodo,
+ca.fechaCierre as fechaCierre,
+ca.tea as tea,
+ca.interesProyectado as interes,
+tm.denominacion as moneda,
+pj.razonSocial as razonSocial,
+per.nombre as nombre,
+per.apellidoPat as apellidoPat,
+per.apellidoMat as apellidoMat,
+rl.cargo as cargo,
+(select a.nombre from agencia a where a.sede = false) as agencia
+from cuentaahorro ca
+inner join cliente c on ca.idCliente = c.id
+inner join tipomoneda tm on tm.id=ca.idTipomoneda
+inner join personajuridica pj on pj.idCliente = c.id
+inner join representantelegal rl on rl.idPersonajuridica=pj.id
+inner join persona per on rl.idPersona = per.id
+where ca.id=$P{idCuentaahorro}]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="importe" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="periodo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaCierre" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tea" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="interes" class="java.lang.Double"/>
+	<field name="moneda" class="java.lang.String"/>
+	<field name="razonSocial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellidoPat" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellidoMat" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cargo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="agencia" class="java.lang.String"/>
+	<variable name="variable1" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{id}]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="totalCuota" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="totalAmortizacion" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<group name="sede_calificacion" isStartNewPage="true" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[]]></groupExpression>
+		<groupHeader>
+			<band height="349">
+				<rectangle radius="5">
+					<reportElement x="0" y="249" width="756" height="73" uuid="52c2997b-7724-406d-ac21-a5aecc13a065"/>
+				</rectangle>
+				<rectangle radius="5">
+					<reportElement x="0" y="195" width="756" height="53" backcolor="#D3CCCC" uuid="0ad6e777-a728-4934-b0f2-2e625ca8530d"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="0" y="195" width="152" height="53" uuid="020639ec-5a0a-4150-b028-510d273eb96c"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="15" isBold="false" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[MONTO DE DEPOSITO]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="0" y="1" width="755" height="23" uuid="f8daba16-c038-403f-b5c3-752bd9e3ca82"/>
+					<textElement verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["N° : 00"+ $F{id}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement x="0" y="34" width="756" height="34" uuid="0d084f8f-c97f-4aa6-8ca3-6c1b42baad8a"/>
+					<textElement markup="html">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA["                                 Este documento acredita la constitucion de un depósito a Plazo Fijo en "+$F{moneda}+" a la orden y disposicion de la persona juridica: <b>"+$F{razonSocial}+"</b> teniendo como representante legal en calidad de <b>"+$F{cargo}+"</b> al Sr(a). "]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="24" width="756" height="2" uuid="6d2df24a-12d3-4e5b-9f12-43fc62f552dc"/>
+				</line>
+				<staticText>
+					<reportElement x="450" y="195" width="152" height="53" uuid="b90f7f48-61f5-4be0-aa99-996cc1cf58af"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="15" isBold="false" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[TASA EFECTIVA ANUAL]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="307" y="195" width="143" height="53" uuid="1c4eb9ab-07c0-4c70-88fc-cc71036ef24e"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="15" isBold="false" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[FECHA DE VENCIMIENTO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="152" y="195" width="155" height="53" uuid="bf915586-77ac-4878-89f7-e49dfd916c95"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+						<font size="15" isBold="false" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[PLAZO <br/> PACTADO]]></text>
+				</staticText>
+				<textField pattern="###0.00">
+					<reportElement x="0" y="68" width="756" height="22" uuid="cd2bd4a9-3858-4d54-8658-62203668f7e6"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["                                 "+ $F{nombre}+" "+ $F{apellidoPat}+" "+ $F{apellidoMat}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement x="0" y="90" width="756" height="22" uuid="cdd676ff-7150-4cb2-8e97-206affc27311"/>
+					<textElement textAlignment="Right" markup="html">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA["                                 Cuenta del socio N° <b>"+ $F{codigo}+"<b>"]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement x="0" y="112" width="756" height="22" uuid="7a0b0f98-ec86-4cf0-923b-92785f8d8e3c"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Por el importe en "+ $F{moneda}+" de:"]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement x="0" y="134" width="756" height="22" uuid="dd307555-f443-4761-9ed8-636992ee4581"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["                           "+ $P{montoTexto}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement x="0" y="156" width="756" height="22" uuid="63ac1dde-385d-4053-9178-4f4bcb6a6b3b"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Que será devuelto al vencimiento del plazo pactado: "]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="602" y="195" width="154" height="53" uuid="14946ade-0029-4e7a-a1cf-d46b5cd8b67d"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="15" isBold="false" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[INTERES PROYECTADO]]></text>
+				</staticText>
+				<textField pattern="###0.00">
+					<reportElement x="0" y="251" width="152" height="71" uuid="51c63e74-1d73-475b-a632-891fd19b8a65"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{importe}]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy">
+					<reportElement x="307" y="251" width="143" height="71" uuid="d3ac38fb-f44c-49fc-9cfc-301369c2c09e"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{fechaCierre}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement x="450" y="251" width="152" height="71" uuid="2642b0e9-75da-4fb8-bc76-4c3280201988"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tea}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement x="602" y="251" width="154" height="71" uuid="eca8e7e6-d556-48a7-ab6a-e147f4e92b3f"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{interes}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0">
+					<reportElement x="152" y="251" width="155" height="71" uuid="25992c6c-b644-4943-8731-cfdde47c2017"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="152" y="249" width="1" height="72" uuid="4c5e3ac1-118b-44b1-b4ee-398f4cc20cb3"/>
+				</line>
+				<line>
+					<reportElement x="307" y="251" width="1" height="72" uuid="9b2828cd-e591-4743-af25-9d27c36ed509"/>
+				</line>
+				<line>
+					<reportElement x="450" y="248" width="1" height="72" uuid="1d5cd645-1d6a-45f4-9123-7bf8c9dd9925"/>
+				</line>
+				<line>
+					<reportElement x="602" y="249" width="1" height="72" uuid="fc5109f7-6651-45c2-81e2-d033230bafbb"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="32">
+				<textField pattern="###0.00">
+					<reportElement x="0" y="1" width="71" height="26" uuid="3e81f269-8432-40bb-85ce-c8e97bcb093c"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Oficina: "]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="71" y="2" width="260" height="25" uuid="5536222a-76d8-429d-a7f1-211ab0ff4329"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{agencia}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="115" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="364" height="94" uuid="c19f3e46-2f99-4b4e-a532-eb1254c89c7e"/>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="88" width="756" height="27" uuid="70f6b386-ac97-4be5-9169-083219fc2e1d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="15" isBold="true" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DEPOSITO A PLAZO FIJO"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<pageFooter>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="639" y="0" width="80" height="13" uuid="76e29740-6967-4237-bbb7-04dff0d89858"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="718" y="0" width="38" height="13" uuid="f1718ae1-fcef-40df-aa35-7e4dff006517"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

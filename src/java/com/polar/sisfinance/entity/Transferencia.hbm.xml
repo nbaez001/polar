@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04/07/2016 09:00:45 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.polar.sisfinance.entity.Transferencia" table="transferencia" catalog="polar" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="bobeda" class="com.polar.sisfinance.entity.Bobeda" fetch="select" lazy="false">
+            <column name="idBobeda" />
+        </many-to-one>
+        <many-to-one name="cajeroByIdCajero1" class="com.polar.sisfinance.entity.Cajero" fetch="select" lazy="false">
+            <column name="idCajero1" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cajeroByIdCajero2" class="com.polar.sisfinance.entity.Cajero" fetch="select" lazy="false">
+            <column name="idCajero2" />
+        </many-to-one>
+        <many-to-one name="tipotransferencia" class="com.polar.sisfinance.entity.Tipotransferencia" fetch="select" lazy="false">
+            <column name="idTipotransferencia" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="com.polar.sisfinance.entity.Usuario" fetch="select" lazy="false">
+            <column name="idUsuario" not-null="true" />
+        </many-to-one>
+        <property name="motivo" type="string">
+            <column name="motivo" length="200" not-null="true" />
+        </property>
+        <property name="monto" type="double">
+            <column name="monto" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="fecha" type="timestamp">
+            <column name="fecha" length="0" not-null="true" />
+        </property>
+        <set name="detallesaldotransferencias" table="detallesaldotransferencia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idTransferencia" not-null="true" />
+            </key>
+            <one-to-many class="com.polar.sisfinance.entity.Detallesaldotransferencia" />
+        </set>
+    </class>
+</hibernate-mapping>

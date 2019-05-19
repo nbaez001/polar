@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04/07/2016 09:00:45 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.polar.sisfinance.entity.Productocredito" table="productocredito" catalog="polar" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="frecuenciapago" class="com.polar.sisfinance.entity.Frecuenciapago" fetch="select" lazy="false">
+            <column name="idFrecuenciapago" not-null="true" />
+        </many-to-one>
+        <property name="codigo" type="string">
+            <column name="codigo" length="20" not-null="true" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="100" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="65535" not-null="true" />
+        </property>
+        <property name="montoMinimo" type="double">
+            <column name="montoMinimo" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="montoMaximo" type="double">
+            <column name="montoMaximo" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="tasa" type="double">
+            <column name="tasa" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="minPeriodoGracia" type="int">
+            <column name="minPeriodoGracia" not-null="true" />
+        </property>
+        <property name="maxPeriodoGracia" type="int">
+            <column name="maxPeriodoGracia" not-null="true" />
+        </property>
+        <property name="minDiasPlazoPago" type="int">
+            <column name="minDiasPlazoPago" not-null="true" />
+        </property>
+        <property name="maxDiasPlazoPago" type="int">
+            <column name="maxDiasPlazoPago" not-null="true" />
+        </property>
+        <property name="tem" type="double">
+            <column name="tem" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="centralRiesgo" type="double">
+            <column name="centralRiesgo" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="encaje" type="double">
+            <column name="encaje" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="tasaSeguroDesgravamen" type="double">
+            <column name="tasaSeguroDesgravamen" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="comisionGastosAdm" type="double">
+            <column name="comisionGastosAdm" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="inicioFechaVigencia" type="date">
+            <column name="inicioFechaVigencia" length="0" not-null="true" />
+        </property>
+        <property name="finFechaVigencia" type="date">
+            <column name="finFechaVigencia" length="0" not-null="true" />
+        </property>
+        <property name="docSustentatorios" type="string">
+            <column name="docSustentatorios" length="500" not-null="true" />
+        </property>
+        <property name="estado" type="boolean">
+            <column name="estado" not-null="true" />
+        </property>
+        <property name="idTipoMoneda" type="int">
+            <column name="idTipoMoneda" not-null="true" />
+        </property>
+        <property name="idTipoGarantia" type="int">
+            <column name="idTipoGarantia" not-null="true" />
+        </property>
+        <property name="idTipoCredito" type="int">
+            <column name="idTipoCredito" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

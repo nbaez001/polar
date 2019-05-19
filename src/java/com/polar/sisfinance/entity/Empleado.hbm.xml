@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04/07/2016 09:00:45 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.polar.sisfinance.entity.Empleado" table="empleado" catalog="polar" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="agencia" class="com.polar.sisfinance.entity.Agencia" fetch="select" lazy="false">
+            <column name="idAgencia" not-null="true" />
+        </many-to-one>
+        <many-to-one name="persona" class="com.polar.sisfinance.entity.Persona" fetch="select" lazy="false">
+            <column name="idPersona" not-null="true" unique="true" />
+        </many-to-one>
+        <many-to-one name="tipoempleado" class="com.polar.sisfinance.entity.Tipoempleado" fetch="select" lazy="false">
+            <column name="idTipoempleado" not-null="true" />
+        </many-to-one>
+        <property name="fechaInicio" type="date">
+            <column name="fechaInicio" length="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

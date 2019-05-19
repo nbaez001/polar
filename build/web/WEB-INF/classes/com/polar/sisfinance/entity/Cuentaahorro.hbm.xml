@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04/07/2016 09:00:45 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.polar.sisfinance.entity.Cuentaahorro" table="cuentaahorro" catalog="polar" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cliente" class="com.polar.sisfinance.entity.Cliente" fetch="select" lazy="false">
+            <column name="idCliente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="estadocuentaahorro" class="com.polar.sisfinance.entity.Estadocuentaahorro" fetch="select" lazy="false">
+            <column name="idEstadocuentaahorro" not-null="true" />
+        </many-to-one>
+        <many-to-one name="frecuenciaaporte" class="com.polar.sisfinance.entity.Frecuenciaaporte" fetch="select" lazy="false">
+            <column name="idFrecuenciaaporte" />
+        </many-to-one>
+        <many-to-one name="productoahorro" class="com.polar.sisfinance.entity.Productoahorro" fetch="select" lazy="false">
+            <column name="idProductoahorro" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipomoneda" class="com.polar.sisfinance.entity.Tipomoneda" fetch="select" lazy="false">
+            <column name="idTipomoneda" not-null="true" />
+        </many-to-one>
+        <property name="codigo" type="string">
+            <column name="codigo" length="50" not-null="true" />
+        </property>
+        <property name="tea" type="double">
+            <column name="tea" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="importe" type="double">
+            <column name="importe" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="montoInscripcion" type="double">
+            <column name="montoInscripcion" precision="22" scale="0"/>
+        </property>
+        <property name="montoCarnet" type="double">
+            <column name="montoCarnet" precision="22" scale="0"/>
+        </property>
+        <property name="periodo" type="java.lang.Integer">
+            <column name="periodo" />
+        </property>
+        <property name="interesProyectado" type="double">
+            <column name="interesProyectado" precision="22" scale="0"/>
+        </property>
+        <property name="fechaApertura" type="date">
+            <column name="fechaApertura" length="0" not-null="true" />
+        </property>
+        <property name="fechaCierre" type="date">
+            <column name="fechaCierre" length="0" />
+        </property>
+        <property name="capitalActual" type="double">
+            <column name="capitalActual" precision="22" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

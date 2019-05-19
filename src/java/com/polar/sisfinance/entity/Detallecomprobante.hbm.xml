@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04/07/2016 09:00:45 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.polar.sisfinance.entity.Detallecomprobante" table="detallecomprobante" catalog="polar" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="comprobante" class="com.polar.sisfinance.entity.Comprobante" fetch="select" lazy="false">
+            <column name="idComprobante" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipodocumento" class="com.polar.sisfinance.entity.Tipodocumento" fetch="select" lazy="false">
+            <column name="idTipodocumento" not-null="true" />
+        </many-to-one>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="250" not-null="true" />
+        </property>
+        <property name="monto" type="double">
+            <column name="monto" precision="22" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteOrdenGeneralPromedio" printOrder="Horizontal" pageWidth="595" pageHeight="842" columnWidth="509" leftMargin="43" rightMargin="43" topMargin="14" bottomMargin="14" uuid="f7e301cc-1e7b-47c2-9a93-a68a4f1d5d19">
+	<property name="ireport.zoom" value="1.000000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="390"/>
+	<parameter name="idCuentacredito" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+p.dni as dni,
+p.nombre as nombre,
+p.apellidoPat as apellidoPat,
+p.apellidoMat as apellidoMat,
+p.profesion as profesion,
+p.departamento as departamento,
+p.provincia as provincia,
+p.distrito as distrito,
+p.direccion as direccion,
+(select a.nombre from agencia a where a.sede=false) as agenciaa,
+(select a.ruc from agencia a where a.sede=false) as ruca,
+(select a.direccion from agencia a where a.sede=false) as direcciona,
+(select a.departamento from agencia a where a.sede=false) as departamentoa,
+(select a.provincia from agencia a where a.sede=false) as provinciaa,
+(select a.distrito from agencia a where a.sede=false) as distritoa,
+(select per.nombre from persona per inner join empleado emp on per.id = emp.idPersona inner join tipoempleado temp on temp.id=emp.idTipoempleado  where temp.id=1) as nombreg,
+(select per.apellidoPat from persona per inner join empleado emp on per.id = emp.idPersona inner join tipoempleado temp on temp.id=emp.idTipoempleado  where temp.id=1) as apellidoPatg,
+(select per.apellidoMat from persona per inner join empleado emp on per.id = emp.idPersona inner join tipoempleado temp on temp.id=emp.idTipoempleado  where temp.id=1) as apellidoMatg,
+cc.importeCredito as importeCredito,
+cc.plazo as plazo,
+cc.fechaVencimiento as fechaVencimiento,
+cc.tasaInteres as tasaInteres,
+cc.garante as garante,
+cc.tasaInteresmora as tasaInteresmora,
+fp.nombre as nombref
+FROM
+     cuentacredito cc
+INNER JOIN frecuenciapago fp ON fp.id = cc.idFrecuenciapago
+INNER JOIN cliente c ON c.id = cc.idCliente
+INNER JOIN personanatural pn ON pn.idCliente = c.id
+INNER JOIN persona p ON p.id = pn.idPersona
+WHERE cc.id = $P{idCuentacredito}]]>
+	</queryString>
+	<field name="dni" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellidoPat" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellidoMat" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="profesion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="departamento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="provincia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="distrito" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="agenciaa" class="java.lang.String"/>
+	<field name="ruca" class="java.lang.String"/>
+	<field name="direcciona" class="java.lang.String"/>
+	<field name="departamentoa" class="java.lang.String"/>
+	<field name="provinciaa" class="java.lang.String"/>
+	<field name="distritoa" class="java.lang.String"/>
+	<field name="nombreg" class="java.lang.String"/>
+	<field name="apellidoPatg" class="java.lang.String"/>
+	<field name="apellidoMatg" class="java.lang.String"/>
+	<field name="importeCredito" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="plazo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaVencimiento" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tasaInteres" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="garante" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tasaInteresmora" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombref" class="java.lang.String"/>
+	<variable name="totalCuota" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="totalAmortizacion" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<group name="sede_calificacion" isStartNewPage="true" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[]]></groupExpression>
+		<groupHeader>
+			<band height="484">
+				<textField isStretchWithOverflow="true">
+					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="509" height="484" uuid="40e6e85d-b0f6-40ca-8b99-e11cf39b0ab3"/>
+					<textElement textAlignment="Justified" markup="html">
+						<paragraph lineSpacing="1_1_2"/>
+					</textElement>
+					<textFieldExpression><![CDATA["YO, <b>"+$F{nombre}+" "+$F{apellidoPat}+" "+$F{apellidoMat}+"</b> Identificado con DNI N° "+$F{dni}+" de ocupación "+
+($F{profesion}==null?".......................................":$F{profesion})+" con domicilio en "+($F{direccion}==null?".......................................":$F{direccion}) +" del distrito de "+
+($F{distrito}==null?".......................................":$F{distrito})+", provincia de "+($F{provincia}==null?".......................................":$F{provincia})+", departamento de "+($F{departamento}==null?".......................................":$F{departamento})+". Llamado en adelante <b>EL PRESTATARIO</b>"+
+", recibo préstamo de la <b>"+($F{agenciaa}==null?".......................................":$F{agenciaa})+"</b>, RUC <b>"+($F{ruca}==null?".......................................":$F{ruca})+"</b> ubicado en la"+
+" "+($F{direcciona}==null?".......................................":$F{direcciona})+" del distrito de "+($F{distritoa}==null?".......................................":$F{distritoa})+", representado por su GERENTE el SR(a). <b>"+($F{nombreg}==null?".......................................":$F{nombreg})+" "+($F{apellidoPatg}==null?".......................................":$F{apellidoPatg})+" "+($F{apellidoMatg}==null?".......................................":$F{apellidoMatg})+"</b>"+
+", en adelante <b>EL PRESTAMISTA</b>, la cantidad de <b>S/. "+($F{importeCredito}==0.0?".................":$F{importeCredito})+"</b>, que recibo a "+
+"mi entera satisfacción, sin que exista posterior reclamo bajo los términos y condiciones siguientes:<br><br>"+
+"<b>PRIMERO.-</b> El prestamo sera cancelado en "+($F{plazo}==0?"...........":$F{plazo})+" meses(s) calendario(s), contados a partir "+
+"de la firma del presente, siendo el ultimo dia de pago es el "+($F{fechaVencimiento}==null?".........................":$F{fechaVencimiento})+" en el domicilio de la "+
+"<b>"+($F{agenciaa}==null?".......................................":$F{agenciaa})+".</b><br>"+
+"<b>SEGUNDO.-</b> El dinero que recibo en merito del presente contrato, redituara a un interes de ("+($F{tasaInteres}==null?"............":$F{tasaInteres})+"%) "+
+($F{nombref}==null?"........................":$F{nombref})+" incluido impuesto general a las ventas (IGV 18%).<br>"+
+"<b>TERCERO.-</b> Para respaldar la obligacion contraida dejo como garantia los siguientes documentos, "+
+"debidamente valorizados de mutuo acuerdo, entendiendose ser definitivo y que no requiere efectuar tasacion comercial alguna.<br>"+
+"..............................................................................................................................................................."+
+"..............................................................................................................................................................."+
+"..............................................................................................................................................................."+
+"Asimismo, declaro que el bien dejado en garantia, tiene el rango de primera, y que no existe "+
+"gravamen alguno que afecte la libre disposicion de la prueba.<br>"+
+"<b>CUARTO.-</b> En caso de incumplimiento a la fecha indicada de vencimiento acepto pagar un interes "+
+"moratorio de "+($F{tasaInteresmora}==null?"............":$F{tasaInteresmora})+"% DIARIO, del prestamo y el inmueble de ofrecido como garantia seran puesto a disposicion "+
+"de la <b>"+($F{agenciaa}==null?"...........................":$F{agenciaa})+"</b>, y lo declaro en calidad de desajenado, autorizando su venta para pagar el capital, "+
+"intereses, mora y las comisiones de venta por caer en morosidad.<br>"+
+"<b>QUINTO.-</b> La venta de mi bien sera sobre la base del valor 100% de la liquidacion del prestamo.<br>"+
+"<b>SEXTO.-</b> Los prestamos pueden ser refinanciado por suma iguales o menores que el credito "+
+"original, por un plazo maximo de cuatro meses, utilizando la misma garantia, siempre y cuando de "+
+"haber cancelado los intereses y moras devengados mensualmente.<br>"+
+"<b>SEPTIMO.-</b> Las partes contratantes dejan expresamente establecido que a la celebracion del "+
+"presente contrato no ha mediado causal alguno de anulabilidad o nulidad a, renunciando a toda "+
+"accion o excepcion judicial o extrajudicial que tienda a invalidar el mismo.<br>"+
+"<br>"+
+"Al pie firman los interesados conforme lo pactado en el contrato."]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="107">
+				<line>
+					<reportElement positionType="Float" x="139" y="73" width="156" height="1" uuid="7eea5508-0be6-4932-8c13-1fd5795aef9c"/>
+				</line>
+				<textField>
+					<reportElement positionType="Float" x="71" y="73" width="286" height="13" uuid="a626d007-94d7-4bb8-a04d-0e2de925f23f"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombre}+" "+$F{apellidoPat}+" "+$F{apellidoMat}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement positionType="Float" x="139" y="86" width="156" height="13" uuid="7bcccc17-98a4-432e-8303-8f8c54ad8d65"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["DNI : "+$F{dni}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement positionType="Float" x="371" y="33" width="51" height="70" uuid="14bb9904-1711-41f8-b4b3-091062eaeda4"/>
+				</rectangle>
+				<textField pattern="EEEEE dd &apos;de&apos; MMMMM &apos;del&apos; yyyy">
+					<reportElement positionType="Float" x="340" y="7" width="169" height="13" uuid="f8358fd6-8dad-4f37-b506-d7f8bc603f71"/>
+					<textElement textAlignment="Left">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEE MMMM dd">
+					<reportElement positionType="Float" x="269" y="7" width="71" height="13" uuid="3bb5ef4a-5530-4917-a9a5-02a0af863b41"/>
+					<textElement textAlignment="Right">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Ayacucho,   "]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="119" splitType="Stretch">
+			<image>
+				<reportElement positionType="Float" x="0" y="0" width="340" height="92" uuid="c19f3e46-2f99-4b4e-a532-eb1254c89c7e"/>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement positionType="Float" x="0" y="82" width="509" height="27" uuid="70f6b386-ac97-4be5-9169-083219fc2e1d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CONTRATO DE PRÉSTAMO"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

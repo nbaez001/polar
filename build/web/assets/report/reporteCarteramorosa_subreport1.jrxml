@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteCarteramorosa_subreport1" language="groovy" pageWidth="572" pageHeight="752" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4aea6647-89ca-48c6-b13f-fdec4ceab671">
+	<queryString language="SQL">
+		<![CDATA[SELECT
+p.nombre AS nombre,
+p.apellidoPat AS apellidoPat,
+p.apellidoMat AS apellidoMat,
+p.direccion AS direccion,
+cc.id AS id,
+cc.cuentacredito AS cuentacredito,
+cc.fechaVencimiento AS fechaVencimiento,
+cc.fechaApertura AS fechaDesembolso,
+cc.importeCredito AS importeCredito,
+(select sum(d.cuotac) from desembolso d where d.idCuentacredito=cc.id) as saldoCredito,
+(select sum(d.cuotac) from desembolso d where d.idCuentacredito=cc.id) as principalAtrasado,
+(select sum(d.mora) from desembolso d where d.idCuentacredito=cc.id) as totalMora,
+(select max(d.diasAtraso) from desembolso d where d.idCuentacredito=cc.id and d.idEstadodesembolso<3) as totalDiasatraso,
+(select count(d.id) from desembolso d where d.idCuentacredito=cc.id and cuotac>0.0) as totalCuotaatrasado,
+(select sum(d.cuotac + d.mora) from desembolso d where d.idCuentacredito=cc.id and cuotac>0) as totalMontoadeudado,
+pc.id as pcId
+FROM cuentacredito cc
+INNER JOIN productocredito pc ON pc.id = cc.idProductocredito
+INNER JOIN cliente c ON cc.idCliente = c.id
+INNER JOIN personanatural pn ON pn.idCliente = c.id
+INNER JOIN persona p ON p.id = pn.idPersona
+WHERE cc.fechaVencimiento < '2016-05-05' AND cc.idEstadocredito=6
+ORDER BY totalDiasatraso ]]>
+	</queryString>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellidoPat" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellidoMat" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cuentacredito" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaVencimiento" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaDesembolso" class="java.sql.Date"/>
+	<field name="importeCredito" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="saldoCredito" class="java.lang.Double"/>
+	<field name="principalAtrasado" class="java.lang.Double"/>
+	<field name="totalMora" class="java.lang.Double"/>
+	<field name="totalDiasatraso" class="java.lang.Integer"/>
+	<field name="totalCuotaatrasado" class="java.lang.Long"/>
+	<field name="totalMontoadeudado" class="java.lang.Double"/>
+	<field name="pcId" class="java.lang.Integer"/>
+	<group name="pcId">
+		<groupExpression><![CDATA[$F{pcId}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

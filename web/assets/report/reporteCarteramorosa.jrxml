@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteOrdenGeneralPromedio" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="800" leftMargin="21" rightMargin="21" topMargin="14" bottomMargin="14" uuid="f7e301cc-1e7b-47c2-9a93-a68a4f1d5d19">
+	<property name="ireport.zoom" value="1.1000000000000119"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="agencia" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="usuario" class="java.lang.String"/>
+	<parameter name="fecha" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/nerio/NetBeansProjects/POLAR/polar240516/polar/web/assets/report/"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+(SELECT count(cc2.id) FROM cuentacredito cc2 WHERE cc2.fechaVencimiento < $P{fecha} AND cc2.idEstadocredito=6) as totalcc,
+(SELECT sum(cc2.importeCredito) FROM cuentacredito cc2 WHERE cc2.fechaVencimiento < $P{fecha} AND cc2.idEstadocredito=6) as totalccImportecredito,
+
+(select sum(cuotac) from(
+SELECT SUM(d2.cuotac) as cuotac
+FROM desembolso d2
+INNER JOIN cuentacredito cc2 ON d2.idCuentacredito = cc2.id
+WHERE d2.idEstadodesembolso <3
+AND cc2.fechaVencimiento <  $P{fecha}
+AND cc2.idEstadocredito =6
+GROUP BY cc2.id)tcuotac) as totalccSaldocreditos,
+
+(select sum(mora) from(
+SELECT SUM(d3.mora) as mora
+FROM desembolso d3
+INNER JOIN cuentacredito cc3 ON d3.idCuentacredito = cc3.id
+WHERE d3.idEstadodesembolso <3
+AND cc3.fechaVencimiento <  $P{fecha}
+AND cc3.idEstadocredito =6
+GROUP BY cc3.id
+)tmora) as totalccMoras,
+
+(select sum(cm) from(
+SELECT SUM(d4.cuotac + d4.mora) as cm
+FROM desembolso d4
+INNER JOIN cuentacredito cc4 ON d4.idCuentacredito = cc4.id
+WHERE d4.idEstadodesembolso <3
+AND cc4.fechaVencimiento <  $P{fecha}
+AND cc4.idEstadocredito =6
+GROUP BY cc4.id
+)tcuotacm) as totalccMontoadeudados,
+
+pc.id as idProductocredito
+FROM productocredito pc
+INNER JOIN cuentacredito cc ON cc.idProductocredito = pc.id
+WHERE cc.fechaVencimiento < $P{fecha} AND cc.idEstadocredito=6
+GROUP BY pc.id]]>
+	</queryString>
+	<field name="totalcc" class="java.lang.Long"/>
+	<field name="totalccImportecredito" class="java.lang.Double"/>
+	<field name="totalccSaldocreditos" class="java.lang.Double"/>
+	<field name="totalccMoras" class="java.lang.Double"/>
+	<field name="totalccMontoadeudados" class="java.lang.Double"/>
+	<field name="idProductocredito" class="java.lang.Integer"/>
+	<variable name="variable1" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<group name="sede_calificacion" isStartNewPage="true" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[]]></groupExpression>
+		<groupFooter>
+			<band height="17">
+				<textField pattern="###0">
+					<reportElement x="267" y="3" width="100" height="14" uuid="047d319d-144a-4793-817c-06db2c4c693f"/>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{totalcc}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement x="409" y="3" width="61" height="14" uuid="953f6408-6ef0-4977-a4db-67b49eccfcb6"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{totalccImportecredito}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement x="577" y="3" width="48" height="14" uuid="4241cf56-5c96-48ad-b238-972d92af2b5e"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{totalccMoras}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement x="719" y="3" width="54" height="14" uuid="b2c8ad9c-d07c-468d-a05b-f254bbb82f8e"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{totalccMontoadeudados}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement x="482" y="3" width="95" height="14" uuid="a6d1f9e8-e979-4286-938c-ede790032634"/>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{totalccSaldocreditos}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="1" width="799" height="1" uuid="6821cb17-cf0e-45cd-9588-aa0823a8734f"/>
+					<graphicElement>
+						<pen lineStyle="Dotted"/>
+					</graphicElement>
+				</line>
+				<textField pattern="###0">
+					<reportElement x="0" y="3" width="213" height="14" uuid="ab8723bb-809b-479f-b665-82a8f6514d9a"/>
+					<textElement textAlignment="Left">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Total por moneda: "]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="139" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="335" height="67" uuid="c19f3e46-2f99-4b4e-a532-eb1254c89c7e"/>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="63" width="800" height="15" uuid="70f6b386-ac97-4be5-9169-083219fc2e1d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["REPORTE DE CARTERA MOROSA A LA FECHA POR POR PRODUCTO CREDITO"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="656" y="29" width="144" height="13" uuid="d4abb96f-56f6-4dcd-b573-5ab7bdbb3738"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="616" y="28" width="40" height="13" uuid="27bc2b79-4486-4a2e-b9ad-1625d749e89c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Fecha : "]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="656" y="42" width="144" height="13" uuid="ab3ed9c3-7b79-4ac3-a69c-a5ed070f8aec"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="616" y="41" width="40" height="13" uuid="b314d48f-aee7-43da-8f5f-0574794f503a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Usuario : "]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="78" width="800" height="15" uuid="17c3a209-eb8e-4173-a184-66d0bdba3125"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["FECHA CLASIFICACIÓN: "+$P{fecha}+" DIAS DE ATRASO DESDE: 0 HASTA: 1000000"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="93" width="65" height="15" uuid="55d68fa8-27da-4e1c-b111-dd6d53ce12f8"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Agencia: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="108" width="65" height="15" uuid="ee16ff20-1c53-4859-b9f5-0a58600e2f7b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Moneda: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="123" width="800" height="16" uuid="b845f2d6-6660-438c-8a8b-4098f5cf32c7"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="none">
+					<font size="8" isBold="false" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["N: NORMAL (1-8 DIAS)          CCP: CLIENTE CON PROBLEMAS POTENCIALES (9-30 DIAS)          D: DEFICIENTE (31-60 DIAS)          U: DUDOSO (61-90 DIAS)          P: PERDIDA (91 A MAS DIAS)"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="65" y="93" width="735" height="15" uuid="1ba0dd00-a2be-4aea-ba9b-6fdf6bf7d09a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="false" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{agencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="65" y="108" width="735" height="15" uuid="c3400e46-b4b3-4c53-8544-032e88d3ed4d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="false" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["SOLES"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="41" splitType="Stretch">
+			<subreport>
+				<reportElement x="-21" y="0" width="841" height="40" uuid="9c7205d1-87ac-41c0-a443-2eac949bebc0"/>
+				<subreportParameter name="fecha">
+					<subreportParameterExpression><![CDATA[$P{fecha}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idProductocredito">
+					<subreportParameterExpression><![CDATA[$F{idProductocredito}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "reporteCarteramorosa_subreport2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement x="682" y="0" width="80" height="13" uuid="76e29740-6967-4237-bbb7-04dff0d89858"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="761" y="0" width="38" height="13" uuid="f1718ae1-fcef-40df-aa35-7e4dff006517"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

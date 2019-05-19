@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 04/07/2016 09:00:45 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.polar.sisfinance.entity.Desembolso" table="desembolso" catalog="polar" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cuentacredito" class="com.polar.sisfinance.entity.Cuentacredito" fetch="select" lazy="false">
+            <column name="idCuentacredito" not-null="true" />
+        </many-to-one>
+        <many-to-one name="estadodesembolso" class="com.polar.sisfinance.entity.Estadodesembolso" fetch="select" lazy="false">
+            <column name="idEstadodesembolso" not-null="true" />
+        </many-to-one>
+        <property name="fechaVence" type="date">
+            <column name="fechaVence" length="0" not-null="true" />
+        </property>
+        <property name="fechaPago" type="date">
+            <column name="fechaPago" length="0" />
+        </property>
+        <property name="diaPago" type="string">
+            <column name="diaPago" length="10" not-null="true" />
+        </property>
+        <property name="cuota" type="double">
+            <column name="cuota" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="interes" type="double">
+            <column name="interes" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="amortizacion" type="double">
+            <column name="amortizacion" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="saldoInsoluto" type="double">
+            <column name="saldoInsoluto" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="deudaExtinguida" type="double">
+            <column name="deudaExtinguida" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="cuotac" type="double">
+            <column name="cuotac" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="mora" type="double">
+            <column name="mora" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="cargos" type="double">
+            <column name="cargos" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="diasAtraso" type="int">
+            <column name="diasAtraso" not-null="true" />
+        </property>
+        <property name="idEstadomora" type="int">
+            <column name="idEstadomora" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

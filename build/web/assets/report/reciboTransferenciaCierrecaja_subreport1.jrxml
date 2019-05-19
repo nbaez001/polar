@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="subreport1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="511" leftMargin="42" rightMargin="42" topMargin="0" bottomMargin="0" uuid="c6e4b519-068a-4f2e-9c7f-1739bfd73921">
+	<property name="ireport.zoom" value="3.452271214393119"/>
+	<property name="ireport.x" value="1420"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idCajero" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+tr.codigo as codigo,
+tr.fecha as fecha,
+tr.nombreCliente as cliente,
+tt.denominacion as tipo,
+(select sum(o2.total) from operacion o2 where o2.idTransaccion=tr.id) as monto
+from transaccion tr
+inner join operacion o on tr.id=o.idTransaccion
+inner join tipotransaccion tt on tr.idTipotransaccion=tt.id
+inner join cajero c on tr.idCajero=c.id
+where c.id=$P{idCajero} and tr.idTipotransaccion=2
+group by tr.id]]>
+	</queryString>
+	<field name="codigo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="tipo" class="java.lang.String"/>
+	<field name="monto" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="total" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{monto}]]></variableExpression>
+	</variable>
+	<group name="pcId">
+		<groupExpression><![CDATA[]]></groupExpression>
+		<groupFooter>
+			<band height="11">
+				<staticText>
+					<reportElement x="377" y="0" width="78" height="11" uuid="f69a25f3-28d3-49f2-9086-9515b1cf82cd"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total ingreso: ]]></text>
+				</staticText>
+				<textField pattern="###0.00" isBlankWhenNull="true">
+					<reportElement x="455" y="0" width="56" height="11" uuid="7cb79dbe-6924-4fe4-af02-22ce5261f641"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="455" y="-1" width="56" height="1" uuid="89dce6d4-f0a3-4c3a-88fc-1ef4ec19e793"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="455" y="11" width="56" height="11" uuid="f2e743d7-feba-43b0-b315-98da6053445d"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="12" uuid="cc3252a9-e2e4-4b39-bad0-dacfa73e273c"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ingresos: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="11" width="100" height="11" uuid="c68aacd1-6ab2-416c-835d-e9dea01e5b8b"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rel. Ingreso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="11" width="71" height="11" uuid="48b8d968-1ca8-4691-9fba-e5e7ba7b0f04"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="11" width="284" height="11" uuid="f82d48f5-49dd-4d11-9a05-855ed9effefe"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="21" width="511" height="1" uuid="023597ae-696e-4aaa-8605-963c42493c4e"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="455" y="0" width="56" height="12" uuid="f0105994-21c1-44dc-bcf3-cf713c3ab900"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{monto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm.ss a" isBlankWhenNull="true">
+				<reportElement x="100" y="0" width="71" height="12" uuid="2024096f-9fc2-47ae-9694-28f7d542900d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="12" uuid="229d2292-a44b-4804-8693-0c02981732db"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="171" y="0" width="284" height="12" uuid="9c0fe8cb-754c-4864-863d-44c0f71e8038"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

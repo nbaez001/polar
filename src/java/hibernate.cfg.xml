@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/polar</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">1234</property>
+    <mapping resource="com/polar/sisfinance/entity/Representantelegal.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Operacion.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Comprobante.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Caja.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Detallesaldocajero.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Usuario.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Permiso.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Estadocuentaahorro.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Transferencia.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Detallecomprobante.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Desembolso.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Transaccion.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Tipoempleado.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Productoahorro.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Cuentaahorro.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Calendario.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Registrocliente.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Cliente.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Cajero.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Provincia.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Registroadmisioncredito.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Naturalezacomprobante.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Tipodocumento.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Bobeda.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Empleado.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Tipoahorro.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Persona.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Estadodesembolso.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Mastertable.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Distrito.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Productocredito.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Aporte.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Registrocuentacredito.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Rol.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Frecuenciaaporte.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Tipotransferencia.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Tipomoneda.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Estadocredito.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Departamento.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Detallesaldobobeda.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Conyugue.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Frecuenciapago.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Cuentacredito.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Pais.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Tipotransaccion.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Garante.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Personanatural.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Agencia.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Detallesaldotransferencia.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Personajuridica.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Genero.hbm.xml"/>
+    <mapping resource="com/polar/sisfinance/entity/Estadocivil.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>
