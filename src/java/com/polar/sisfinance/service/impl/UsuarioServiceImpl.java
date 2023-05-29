@@ -75,9 +75,11 @@ public class UsuarioServiceImpl extends GenericServiceImpl<Usuario> implements U
             //HASH DE CONTRASEÑA
             u.setContrasena(HashUtil.getStringMessageDigest(u.getContrasena(), HashUtil.SHA1));
 
-            if (!personaService.existe(p)) {
+            Persona p2 = personaService.existe(p);
+            if (p2==null) {
                 return usuarioDao.crearUsuarioPersonaNueva(p, e, u, lp);
             } else {
+                p.setId(p2.getId());
                 return usuarioDao.crearUsuarioPersonaExistente(p, e, u, lp);
             }
         }

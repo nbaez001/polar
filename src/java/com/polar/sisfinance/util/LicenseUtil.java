@@ -11,7 +11,7 @@ package com.polar.sisfinance.util;
  */
 public class LicenseUtil {
 
-    private static String fechaLimite = "2019/08/01";
+    private static String fechaLimite = "2023/07/31";
 
     public static String getFechaLimite() {
         return fechaLimite;

@@ -24,13 +24,13 @@ public class PersonaServiceImpl extends GenericServiceImpl<Persona> implements P
     PersonaDao personaDao;
 
     @Override
-    public boolean existe(Persona p) {
+    public Persona existe(Persona p) {
         Map<String, Integer> eqParams = new HashMap<>();
         eqParams.put("dni", p.getDni());
 
         p = personaDao.CriteriaUnique(eqParams, null);
 
-        return p != null;
+        return p;
     }
 
     @Override

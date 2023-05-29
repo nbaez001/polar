@@ -13,7 +13,7 @@ import com.polar.sisfinance.entity.Persona;
  */
 public interface PersonaService extends GenericService<Persona>{
     
-    public boolean existe(Persona p);
+    public Persona existe(Persona p);
     
     public Persona get(String dni);
 }
